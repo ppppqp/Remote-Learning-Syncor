@@ -17,6 +17,7 @@ function App() {
   if (!token) {
     return <Login setToken={setToken} />;
   }
+
   socket.on("group change", function (newGroup) {
     setGroup(newGroup);
     console.log("new Group: ", newGroup);
@@ -39,7 +40,12 @@ function App() {
   }
   if (!started) {
     return (
-      <WaitingRm setStarted={setStarted} group={group} setGroup={setGroup} />
+      <WaitingRm
+        setStarted={setStarted}
+        group={group}
+        setGroup={setGroup}
+        userName={token.username}
+      />
     );
   }
   return (

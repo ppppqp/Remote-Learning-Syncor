@@ -1,0 +1,32 @@
+.setWaitingRm-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+  font-size: 20px;
+}
+.waitingList {
+  height: 400px;
+  padding: 20px;
+  width: 500px;
+  text-align: center;
+  border: solid 1px #ddd;
+}
+.waitingList ul li {
+  list-style: none;
+  font-size: 25px;
+}
+.waitingList ul li::before {
+  content: " ";
+  height: 30px;
+  width: 30px;
+  background-image: url(../images/icon.jpeg);
+  /* background-color: red; */
+  background-size: 10% 10%;
+}
+.setWaitingRm-wrapper button {
+  margin-top: 20px;
+}
+.strong {
+  font-weight: 800;
+}

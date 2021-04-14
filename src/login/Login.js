@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./Login.css";
 
-async function loginUser(credentials) {
+async function loginUser(token) {
   return fetch("http://localhost:8080/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(credentials),
+    body: JSON.stringify(token),
   }).then((data) => data.json());
 }
 
@@ -27,8 +27,8 @@ export default function Login({ setToken }) {
 
   return (
     <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form onSubmit={handleSubmit}>
+      <div className="header">Please Log In</div>
+      <form className="loginForm" onSubmit={handleSubmit}>
         <label>
           <p>Username</p>
           <input type="text" onChange={(e) => setUserName(e.target.value)} />
@@ -41,7 +41,9 @@ export default function Login({ setToken }) {
           />
         </label>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
         </div>
       </form>
     </div>

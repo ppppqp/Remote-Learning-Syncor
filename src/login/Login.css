@@ -2,4 +2,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 500px;
+}
+.header {
+  flex: 1;
+  color: white;
+  width: 100%;
+  background-color: rgb(0, 59, 148);
+  text-align: center;
+  font-size: 20px;
+  line-height: 100px;
+  font-weight: 800;
+}
+.loginForm {
+  margin-top: 100px;
+  font-size: 20px;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loginForm label {
+  flex: 3;
+  text-align: center;
 }

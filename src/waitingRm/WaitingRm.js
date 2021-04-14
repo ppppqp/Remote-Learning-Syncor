@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-
+import "./waitingRm.css";
 export default function WaitingRm({ group, userName, setStarted, setGroup }) {
   const [member, setMember] = useState();
   const socket = io("http://localhost:8080");
   console.log(group);
-  // on component mount, fetch the current group
-  // console.log(group);
-  // socket.on("group change", async function (mem) {
-  //   const newMember = member;
-  //   newMember.push({ username: mem });
-  //   console.log("newMember", newMember);
-  //   setMember(newMember);
-  // });
-  return (
-    <div className="setWaitingRm-wrapper">
-      <h1>Please wait for everyone to join</h1>
-      <ul>
-        {group.member.map((g) => {
-          return <li>{g.username}</li>;
-        })}
-      </ul>
+  console.log(userName);
+  const button =
+    group.host === userName ? (
       <button
         type="button"
         className="btn btn-primary"
@@ -28,6 +15,27 @@ export default function WaitingRm({ group, userName, setStarted, setGroup }) {
       >
         Start
       </button>
+    ) : null;
+  return (
+    <div className="setWaitingRm-wrapper">
+      <div className="header">Waiting Room</div>
+      <div className="waitingList">
+        <div>
+          Host:
+          <span className="strong">{group.host}</span>
+        </div>
+        <div>
+          Room No.:
+          <span className="strong">{group.roomNo}</span>
+        </div>
+        Joined Member:
+        <ul>
+          {group.member.map((g) => {
+            return <li className="item">{g.username}</li>;
+          })}
+        </ul>
+      </div>
+      {button}
     </div>
   );
 }

@@ -14,14 +14,8 @@ export default function Chat({ userName }) {
     }
   };
   useEffect(() => {
-    let isMounted = true; // note this flag denote mount status
     socket.on("chat message", function (msg) {
-      // const newMessages = messages;
-      // newMessages.push(msg);
-      // // if (isMounted) {
       setMessages([...messages, msg]);
-      console.log(messages);
-      // }
       //https://stackoverflow.com/questions/53949393/cant-perform-a-react-state-update-on-an-unmounted-component
       // window.scrollTo(0, document.body.scrollHeight);
     });

@@ -1,0 +1,35 @@
+.setGroup-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+  font-size: 20px;
+}
+
+.setGroupForm {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.setGroupForm1,
+.setGroupForm2 {
+  margin-top: 50px;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.setGroupForm select,
+input {
+  height: 50px;
+  width: 300px;
+}
+.setGroupForm input {
+  margin-bottom: 5px;
+}
+.btn-primary {
+  width: 100px;
+  height: 50px;
+}

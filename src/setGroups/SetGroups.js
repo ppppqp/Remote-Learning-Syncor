@@ -17,6 +17,7 @@ export default function SetGroups({ userName, setGroup, setGroupReady }) {
       },
       body: JSON.stringify(group),
     });
+    console.log(group);
     setGroup(group);
     setGroupReady(true);
 
@@ -24,44 +25,41 @@ export default function SetGroups({ userName, setGroup, setGroupReady }) {
   };
   const handleJoin = async (e) => {
     e.preventDefault();
-    // const group = await fetch("http://localhost:8080/joinGroup", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ userName: userName }),
-    // }).then((data) => data.json());
-    // console.log("join!");
     console.log("emit!");
     socket.emit("group change", userName);
-    // setGroup(group);
     setGroupReady(true);
   };
   return (
     <div className="setGroup-wrapper">
-      <h1>Create a group</h1>
-      <form onSubmit={handleCreate}>
-        You can create a classroom by No.257
-        <label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            onChange={(e) => (videoNo = parseInt(e.target.value))}
-          >
-            <option selected>Select a lecture video</option>
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
-        </label>
-        <div>
-          <button type="submit">Create</button>
-        </div>
-      </form>
+      <div className="header">Create or Join a Group</div>
+      <div className="setGroupForm1">
+        <h1>create a classroom by No.257</h1>
+        <form className="setGroupForm" onSubmit={handleCreate}>
+          <label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              onChange={(e) => (videoNo = parseInt(e.target.value))}
+            >
+              <option selected>Select a lecture video</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </label>
+          <div>
+            <button type="submit" className="btn btn-primary">
+              Create
+            </button>
+          </div>
+        </form>
+      </div>
       <h1>Join a group</h1>
-      <form onSubmit={handleJoin}>
+      <form className="setGroupForm" onSubmit={handleJoin}>
         <input type="text" onChange={(e) => (roomNo = e.target.value)} />
-        <button type="submit">Join</button>
+        <button type="submit" className="btn btn-primary">
+          Join
+        </button>
       </form>
     </div>
   );
