@@ -26,6 +26,9 @@ io.on("connection", (socket) => {
     console.log(group);
     io.emit("group change", group);
   });
+  socket.on("start room", () => {
+    io.emit("start room");
+  });
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
   });

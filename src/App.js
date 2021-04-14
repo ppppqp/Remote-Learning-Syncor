@@ -22,6 +22,7 @@ function App() {
     setGroup(newGroup);
     console.log("new Group: ", newGroup);
   });
+  socket.on("start room", () => setStarted(true));
   if (!groupReady) {
     return (
       <SetGroups

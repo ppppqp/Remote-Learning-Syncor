@@ -1,0 +1,8 @@
+.Chat-wrapper {
+  width: 400px;
+  opacity: 0.8;
+  background-color: #fff;
+}
+.Chat-wrapper li {
+  list-style: none;
+}

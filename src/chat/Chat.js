@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-
+import "./chat.css";
 export default function Chat({ userName }) {
   const [messages, setMessages] = useState([]);
   var socket = io("localhost:8080");
@@ -22,7 +22,7 @@ export default function Chat({ userName }) {
   }, [messages]);
 
   return (
-    <div className="setWaitingRm-wrapper">
+    <div className="Chat-wrapper">
       <div className="messageField">
         <ul>
           {messages.map((m, i) => (

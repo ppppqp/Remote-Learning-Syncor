@@ -11,7 +11,9 @@ export default function WaitingRm({ group, userName, setStarted, setGroup }) {
       <button
         type="button"
         className="btn btn-primary"
-        onClick={() => setStarted(true)}
+        onClick={() => {
+          socket.emit("start room");
+        }}
       >
         Start
       </button>
