@@ -20,7 +20,7 @@
   content: " ";
   height: 30px;
   width: 30px;
-  background-image: url(../images/icon.jpeg);
+  /* background-image: url(icon.jpeg); */
   /* background-color: red; */
   background-size: 10% 10%;
 }

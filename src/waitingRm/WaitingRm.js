@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import "./waitingRm.css";
-export default function WaitingRm({ group, userName, setStarted, setGroup }) {
-  const [member, setMember] = useState();
-  const socket = io("http://localhost:8080");
-  console.log(group);
-  console.log(userName);
+// const socketWaitingRm = io("http://localhost:8080");
+export default function WaitingRm({
+  group,
+  socket,
+  userName,
+  setStarted,
+  setGroup,
+}) {
   const button =
     group.host === userName ? (
       <button

@@ -1,0 +1,35 @@
+.QA-wrapper {
+  width: 400px;
+  opacity: 0.8;
+  background-color: #fff;
+  margin-right: auto;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+.QA-wrapper .messageField {
+  padding: 20px;
+  flex: 6;
+  box-shadow: 10px 10px 5px #888888;
+  font-size: 24px;
+}
+.userName {
+  color: rgb(19, 11, 139);
+}
+.QA-wrapper .questionForm {
+  display: flex;
+  flex-direction: row;
+}
+.QA-wrapper .questionForm input {
+  padding-left: 20px;
+  flex: 6;
+  max-width: 100%;
+}
+.QA-wrapper .questionForm button {
+  flex: 1;
+  max-width: 200px;
+}
+
+.QA-wrapper li {
+  list-style: none;
+}

@@ -8,7 +8,13 @@
   flex-direction: column;
 }
 .Chat-wrapper .messageField {
+  padding: 20px;
   flex: 6;
+  box-shadow: black 0px 0px 10px inset;
+  font-size: 24px;
+}
+.userName {
+  color: rgb(19, 11, 139);
 }
 .Chat-wrapper .chatForm {
   display: flex;
@@ -26,4 +32,17 @@
 
 .Chat-wrapper li {
   list-style: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+.QuestionId {
+  color: rgb(47, 1, 99);
+  text-align: right;
+  font-size: 20px;
+}
+.question {
+  background-color: rgb(255, 170, 170);
+}
+.answer {
+  background-color: rgb(163, 255, 179);
 }

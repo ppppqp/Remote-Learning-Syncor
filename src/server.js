@@ -4,6 +4,10 @@ const http = require("http");
 
 const socketio = require("socket.io");
 const app = express();
+let roomID = 0;
+let messageID = 0,
+  QuestionID = 0,
+  AnswerID = 0;
 app.use(cors());
 app.use(express.json());
 // app.use(express.static(__dirname + "/waitingRm"));
@@ -14,13 +18,14 @@ const io = socketio(server, {
     methods: ["GET", "POST"],
   },
 });
-
+const Question = [];
 const PORT = process.env.PORT || 8080;
 
 let group = { member: [] };
 
 io.on("connection", (socket) => {
   console.log("new connection");
+  io.emit("create group", { available: [group], newID: roomID });
   socket.on("group change", (member) => {
     group.member.push({ username: member });
     console.log(group);
@@ -29,15 +34,31 @@ io.on("connection", (socket) => {
   socket.on("start room", () => {
     io.emit("start room");
   });
-  socket.on("playvideo",()=>{
+  socket.on("playvideo", () => {
     io.emit("playvideo");
-    console.log("abc")
   });
-  socket.on("pausevideo",()=>{
+  socket.on("pausevideo", () => {
     io.emit("pausevideo");
   });
   socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
+    const messageObj = msg;
+    messageObj["id"] = messageID;
+    io.emit("chat message", messageObj);
+    messageID++;
+  });
+  socket.on("post question", (msg) => {
+    Question.push(msg);
+    msg["id"] = QuestionID;
+    io.emit("post question", Question);
+    QuestionID++;
+  });
+  socket.on("post answer", (msg) => {
+    Question.push(msg);
+    for (let m of Question) {
+      if (m.id === msg.id) m = msg.question;
+    }
+    io.emit("post question", msg.question);
+    AnswerID++;
   });
 });
 
@@ -47,6 +68,8 @@ app.use("/login", (req, res) => {
 
 app.use("/createGroup", (req, res) => {
   group = req.body;
+  roomID++;
+  io.emit("create group", { available: [group], newID: roomID });
 });
 // app.use("/joinGroup", (req, res) => {
 //   const member = req.body;

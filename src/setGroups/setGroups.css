@@ -33,3 +33,12 @@ input {
   width: 100px;
   height: 50px;
 }
+.available {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  height: 300px;
+}
+.available li {
+  list-style: none;
+}

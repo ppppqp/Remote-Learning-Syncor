@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import "./chat.css";
-export default function Chat({ userName }) {
+export default function Chat({ userName, socket }) {
   const [messages, setMessages] = useState([]);
-  var socket = io("localhost:8080");
   let message = "";
   const handleSubmit = (e) => {
     e.preventDefault();
     if (message.length > 0) {
-      socket.emit("chat message", message);
+      const messageObj = {
+        text: message,
+        user: userName,
+        type: "chat",
+      };
+      if (message[0] === "?") {
+        messageObj["type"] = "question";
+        messageObj.text = messageObj.text.slice(1);
+      }
+      if (message[0] === "!") {
+        messageObj["type"] = "answer";
+        messageObj["target"] = parseInt(message[1]);
+        messageObj.text = messageObj.text.slice(2);
+      }
+      socket.emit("chat message", messageObj);
       document.querySelector("#input").value = "";
       message = "";
     }
@@ -17,7 +30,7 @@ export default function Chat({ userName }) {
     socket.on("chat message", function (msg) {
       setMessages([...messages, msg]);
       //https://stackoverflow.com/questions/53949393/cant-perform-a-react-state-update-on-an-unmounted-component
-      // window.scrollTo(0, document.body.scrollHeight);
+      window.scrollTo(0, document.body.scrollHeight);
     });
   }, [messages]);
 
@@ -25,9 +38,21 @@ export default function Chat({ userName }) {
     <div className="Chat-wrapper">
       <div className="messageField">
         <ul>
-          {messages.map((m, i) => (
-            <li> {m} </li>
-          ))}
+          {messages.map((m, i) => {
+            let Id;
+            if (m.type === "question") {
+              Id = "Question ID" + m.id;
+            } else if (m.type === "answer") {
+              Id = "Answer to Question ID" + m.target;
+            } else Id = null;
+            return (
+              <li key={m.id} className={m.type}>
+                {" "}
+                <div className="QuestionId">{Id}</div>
+                <span className="userName">{m.user}</span>:{m.text}{" "}
+              </li>
+            );
+          })}
         </ul>
       </div>
       <form className="chatForm" onSubmit={handleSubmit}>
