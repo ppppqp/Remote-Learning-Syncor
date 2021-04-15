@@ -3,9 +3,27 @@
   opacity: 0.8;
   background-color: #fff;
   margin-right: auto;
-  float: right;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
 }
+.Chat-wrapper .messageField {
+  flex: 6;
+}
+.Chat-wrapper .chatForm {
+  display: flex;
+  flex-direction: row;
+}
+.Chat-wrapper .chatForm input {
+  padding-left: 20px;
+  flex: 6;
+  max-width: 100%;
+}
+.Chat-wrapper .chatForm button {
+  flex: 1;
+  max-width: 200px;
+}
+
 .Chat-wrapper li {
   list-style: none;
 }
-

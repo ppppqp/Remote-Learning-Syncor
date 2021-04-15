@@ -41,39 +41,37 @@ export default function Video({ userName, setGroup, group }) {
     b.src = "./playbutton.png";
   });
   return (
-    <div className="setGroup-wrapper" class="mainvideo">
+    <div class="mainvideo">
       <header class="header">SYNCOR</header>
-      <div class="videoplayer">
-        <video width="100%" height="auto" id="video" src=""></video>
-      </div>
-      <img
-        id="b"
-        src="./playbutton.png"
-        class="but"
-        onMouseOver={(e) => {
-          console.log("over");
-        }}
-        onClick={() => {
-          console.log("imgclick");
-          let a = document.getElementById("video");
-          if (re == 0) {
-            re = re + 1;
-            a.src = path;
-          }
-          console.log(a);
-          let b = document.getElementById("b");
-          if (a != null) {
-            if (a.paused) {
-              b.src = "./stopbutton.png";
-              socket.emit("playvideo");
-            } else {
-              b.src = "./playbutton.png";
-              socket.emit("pausevideo");
+      <div className="video-wrapper">
+        <div class="videoplayer">
+          <video width="100%" height="auto" id="video" src=""></video>
+        </div>
+        <img
+          id="b"
+          src="./playbutton.png"
+          class="but"
+          onClick={() => {
+            console.log("imgclick");
+            let a = document.getElementById("video");
+            if (re == 0) {
+              re = re + 1;
+              a.src = path;
             }
-          }
-        }}
-      ></img>
-      <Chat userName={userName} />
+            let b = document.getElementById("b");
+            if (a != null) {
+              if (a.paused) {
+                b.src = "./stopbutton.png";
+                socket.emit("playvideo");
+              } else {
+                b.src = "./playbutton.png";
+                socket.emit("pausevideo");
+              }
+            }
+          }}
+        ></img>
+        <Chat userName={userName} />
+      </div>
     </div>
   );
 }

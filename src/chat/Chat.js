@@ -30,12 +30,13 @@ export default function Chat({ userName }) {
           ))}
         </ul>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form className="chatForm" onSubmit={handleSubmit}>
         <label>
           <input
             type="text"
             id="input"
             onChange={(e) => (message = e.target.value)}
+            placeholder="enter your message here"
           />
         </label>
         <button type="submit" className="btn btn-primary">
