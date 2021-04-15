@@ -5,6 +5,7 @@ import io from "socket.io-client";
 import "./App.css";
 import SetGroups from "./setGroups/SetGroups";
 import Video from "./video/Video";
+import"./video/Video.css"
 import WaitingRm from "./waitingRm/WaitingRm";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
     console.log("new Group: ", newGroup);
   });
   socket.on("start room", () => setStarted(true));
+  socket.on("playvideo",()=>{console.log("play")});
   if (!groupReady) {
     return (
       <SetGroups
@@ -51,9 +53,8 @@ function App() {
   }
   return (
     <div className="wrapper">
-      <h1>Application</h1>
 
-      <Video />
+      <Video group={group}/>
       {/* <BrowserRouter>
         <Switch>
           <Route path="/SetGroups">

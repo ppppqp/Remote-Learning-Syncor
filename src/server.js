@@ -29,6 +29,13 @@ io.on("connection", (socket) => {
   socket.on("start room", () => {
     io.emit("start room");
   });
+  socket.on("playvideo",()=>{
+    io.emit("playvideo");
+    console.log("abc")
+  });
+  socket.on("pausevideo",()=>{
+    io.emit("pausevideo");
+  });
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
   });

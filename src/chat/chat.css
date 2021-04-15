@@ -2,7 +2,10 @@
   width: 400px;
   opacity: 0.8;
   background-color: #fff;
+  margin-right: auto;
+  float: right;
 }
 .Chat-wrapper li {
   list-style: none;
 }
+

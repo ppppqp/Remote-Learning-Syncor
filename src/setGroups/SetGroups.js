@@ -4,7 +4,7 @@ import io from "socket.io-client";
 
 export default function SetGroups({ userName, setGroup, setGroupReady }) {
   let roomNo = 0;
-  let videoNo = 0;
+  let videoNo = "";
   let host = userName;
   const socket = io("http://localhost:8080");
   const handleCreate = async (e) => {
@@ -33,20 +33,11 @@ export default function SetGroups({ userName, setGroup, setGroupReady }) {
     <div className="setGroup-wrapper">
       <div className="header">Create or Join a Group</div>
       <div className="setGroupForm1">
-        <h1>create a classroom by No.257</h1>
+        <h1>Create a classroom, Enter the name of your video</h1>
+        <h5>Eg: abcd.mp4</h5>
         <form className="setGroupForm" onSubmit={handleCreate}>
-          <label>
-            <select
-              class="form-select"
-              aria-label="Default select example"
-              onChange={(e) => (videoNo = parseInt(e.target.value))}
-            >
-              <option selected>Select a lecture video</option>
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-            </select>
-          </label>
+          <input type="text" id="path" onChange={()=>{let tmp=document.getElementById("path");
+    videoNo=tmp.value;console.log(videoNo)}}/>
           <div>
             <button type="submit" className="btn btn-primary">
               Create

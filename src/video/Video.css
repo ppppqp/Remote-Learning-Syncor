@@ -1,0 +1,46 @@
+.mainvideo{
+
+}
+.videoheader{
+	height:100px;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	position: absolute;
+	display: flex;
+	align-items: center;
+
+	border-width: 3px;
+	border-color: #BBBBBB;
+	border-style: solid;
+	border-left: 0;
+	border-right: 0;
+}
+.videoplayer{
+	display: flex;
+	position: absolute;
+	object-fit: contain;
+	left: 50px;
+	top:105px;
+	width: 70%;
+	height: auto;
+	max-height: 70%;
+}
+.videobutton{
+	display: block;
+	margin-left: auto;
+  margin-right: auto;
+  height:100%;
+}
+.logo{
+	  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.but{
+	position: absolute;
+	top:0%;
+	height: 100px;
+	width: 100px;
+	background-color: rgb(0, 59, 148);
+}
