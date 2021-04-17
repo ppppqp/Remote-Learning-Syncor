@@ -1,15 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 const http = require("http");
-
 const socketio = require("socket.io");
 const app = express();
+const userName = [];
 let roomID = 0;
 let messageID = 0,
   QuestionID = 0,
   AnswerID = 0;
 app.use(cors());
 app.use(express.json());
+
 // app.use(express.static(__dirname + "/waitingRm"));
 const server = http.createServer(app);
 const io = socketio(server, {
@@ -22,14 +23,15 @@ const Question = [];
 const PORT = process.env.PORT || 8080;
 
 let group = { member: [] };
-
+const groups = [];
 io.on("connection", (socket) => {
   console.log("new connection");
-  io.emit("create group", { available: [group], newID: roomID });
-  socket.on("group change", (member) => {
-    group.member.push({ username: member });
-    console.log(group);
-    io.emit("group change", group);
+  io.emit("create group", { available: groups, newID: roomID });
+  socket.on("group change", (req) => {
+    const member = req.member;
+    const id = req.id;
+    if (id < groups.length) groups[id].member.push({ username: member });
+    io.emit("group change", groups[id]);
   });
   socket.on("start room", () => {
     io.emit("start room");
@@ -63,13 +65,32 @@ io.on("connection", (socket) => {
 });
 
 app.use("/login", (req, res) => {
-  res.send(req.body);
+  const token = req.body;
+  const response = {
+    token: token,
+    status: true,
+  };
+  if (userName.indexOf(token.username) === -1) response.status = false;
+  res.send(response);
 });
 
+app.use("/register", (req, res) => {
+  const token = req.body;
+  const response = {
+    token: token,
+    status: true,
+  };
+  if (userName.indexOf(token.username) !== -1) response.status = false;
+  else userName.push(token.username);
+  console.log(userName);
+  res.send(response);
+});
 app.use("/createGroup", (req, res) => {
   group = req.body;
+  group.roomNo = roomID;
   roomID++;
-  io.emit("create group", { available: [group], newID: roomID });
+  groups.push(group);
+  io.emit("create group", { available: groups, newID: roomID });
 });
 // app.use("/joinGroup", (req, res) => {
 //   const member = req.body;

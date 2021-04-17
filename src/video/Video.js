@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Chat from "../chat/Chat";
 import io from "socket.io-client";
-import QA from "../QA/QA";
 import "./Video.css";
-
+import Header from "../header/header";
 var path = "";
 var re = 0;
 
@@ -42,7 +41,7 @@ export default function Video({
 
   return (
     <div class="mainvideo">
-      <header class="header">SYNCOR</header>
+      <Header step={3} userName={""} />
       <div className="video-wrapper">
         <div class="videoplayer">
           <video width="100%" height="auto" id="video" src=""></video>

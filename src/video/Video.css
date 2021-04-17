@@ -1,8 +1,16 @@
 .mainvideo {
+  background-image: url("background.jpeg");
+  background-repeat: no-repeat;
+  background-size: 1960px 1100px;
+  height: 1100px;
 }
 .video-wrapper {
   display: flex;
   position: relative;
+
+  /* background-size: contain; */
+  /* height: 900px; */
+  /* width: 1960px; */
 }
 
 .videoplayer {

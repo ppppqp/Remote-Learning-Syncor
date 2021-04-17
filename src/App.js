@@ -7,7 +7,7 @@ import SetGroups from "./setGroups/SetGroups";
 import Video from "./video/Video";
 import "./video/Video.css";
 import WaitingRm from "./waitingRm/WaitingRm";
-
+import Header from "./header/header";
 const socket = io("http://localhost:8080");
 function App() {
   const [token, setToken] = useState();
@@ -29,7 +29,6 @@ function App() {
     });
     socket.on("post question", function (msg) {
       setQuestions([...questions, msg]);
-      // window.scrollTo(0, document.body.scrollHeight);
     });
   }, []);
   if (!token) {
@@ -38,21 +37,23 @@ function App() {
 
   if (!groupReady) {
     return (
-      <SetGroups
-        setGroup={(group) => {
-          console.log(group);
-          setGroup(group);
-        }}
-        socket={socket}
-        createdGroup={createdGroup}
-        newID={newID}
-        setGroupReady={(value) => {
-          console.log(value);
-          console.log(groupReady);
-          setGroupReady(value);
-        }}
-        userName={token.username}
-      />
+      <div>
+        <SetGroups
+          setGroup={(group) => {
+            console.log(group);
+            setGroup(group);
+          }}
+          socket={socket}
+          createdGroup={createdGroup}
+          newID={newID}
+          setGroupReady={(value) => {
+            console.log(value);
+            console.log(groupReady);
+            setGroupReady(value);
+          }}
+          userName={token.username}
+        />
+      </div>
     );
   }
 

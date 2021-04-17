@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./setGroups.css";
 import io from "socket.io-client";
-// const socketSetGroup = io("http://localhost:8080");
+import Header from "../header/header";
 export default function SetGroups({
   userName,
   setGroup,
@@ -16,7 +16,7 @@ export default function SetGroups({
   console.log(createdGroup);
   const handleCreate = async (e) => {
     e.preventDefault();
-    const group = { roomNo: roomNo, videoNo: videoNo, host: host, member: [] };
+    const group = { roomNo: 0, videoNo: videoNo, host: host, member: [] };
     fetch("http://localhost:8080/createGroup", {
       method: "POST",
       headers: {
@@ -33,15 +33,15 @@ export default function SetGroups({
   const handleJoin = async (e) => {
     e.preventDefault();
     console.log("emit!");
-    socket.emit("group change", userName);
+    socket.emit("group change", { member: userName, id: roomNo });
     setGroupReady(true);
   };
   return (
     <div className="setGroup-wrapper">
-      <div className="header">Create or Join a Group</div>
+      <Header step={1} userName={""} />
       <div className="setGroupForm1">
         <h4>To create a classroom, enter the lecture video name</h4>
-        <h5>Eg: abcd.mp4</h5>
+        <h5>Eg: Lecture1.mp4</h5>
         <h5>
           Your room number is <span className="strong">{newID}</span>
         </h5>

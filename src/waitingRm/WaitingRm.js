@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import "./waitingRm.css";
+import Header from "../header/header";
 // const socketWaitingRm = io("http://localhost:8080");
 export default function WaitingRm({
   group,
@@ -23,7 +24,7 @@ export default function WaitingRm({
     ) : null;
   return (
     <div className="setWaitingRm-wrapper">
-      <div className="header">Waiting Room</div>
+      <Header step={2} userName={""} />
       <div className="waitingList">
         <div>
           Host:
